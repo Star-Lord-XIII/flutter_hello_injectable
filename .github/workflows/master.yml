@@ -30,3 +30,18 @@ jobs:
           channel: ${{ matrix.flutter_version }}
       - run: ./tool/flutter_ci_script_${{ matrix.flutter_version }}.sh
   
+  coverage:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Flutter
+        uses: subosito/flutter-action@v1.3.2
+      - name: Install app dependencies
+        run: flutter pub get
+      - name: Test app
+        run: flutter test --coverage
+      - name: Publish to coveralls.io
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
