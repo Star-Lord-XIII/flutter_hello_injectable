@@ -1,1 +1,0 @@
-find . -name "*.dart" -exec dart format "{}" \;
