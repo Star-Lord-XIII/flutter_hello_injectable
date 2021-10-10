@@ -31,7 +31,6 @@ jobs:
       - run: ./tool/flutter_ci_script_${{ matrix.flutter_version }}.sh
   
   coverage:
-    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
