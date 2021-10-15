@@ -1,0 +1,7 @@
+syntax = "proto3";
+package hello_spec;
+
+message Hello {
+    int32 id = 1;
+    string name = 2;
+}
