@@ -5,7 +5,7 @@ import 'package:hello_spec/generated/proto/hello.pb.dart';
 
 void main() {
   test('hello_spec proto <-> json', () {
-    var jsonStr = '{"id":1,"name""Chintan Ghate"}';
+    var jsonStr = '{"id":1,"name":"Chintan Ghate"}';
     var parsed = Hello()..mergeFromProto3Json(jsonDecode(jsonStr));
     var expected = Hello.create()
       ..id = 1
