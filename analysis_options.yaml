@@ -4,4 +4,7 @@ include: package:flutter_lints/flutter.yaml
 # https://dart.dev/guides/language/analysis-options
 
 analyzer:
-  exclude: [test/**]
+  exclude: [package/**]
+
+linter:
+  rules:
