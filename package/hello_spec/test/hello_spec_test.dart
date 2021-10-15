@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hello_spec/generated/hello.pb.dart';
+import 'package:hello_spec/generated/proto/hello.pb.dart';
 
 void main() {
   test('hello_spec proto <-> json', () {

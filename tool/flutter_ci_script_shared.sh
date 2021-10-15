@@ -15,7 +15,16 @@ function ci_projects () {
         dart analyze
 
         # Run the formatter on all the dart files to make sure everything's linted.
-        dart format --output none --set-exit-if-changed .
+        # Do not format generated dart code
+        find . -name "*.dart" ! -path './package/hello_spec/*' | xargs dart format --set-exit-if-changed
+
+        # Generate dart code for protos
+        if [ "${PROJECT_NAME}" == "package/hello_spec" ]
+        then
+            dart pub global activate protoc_plugin
+            echo "$PUB_CACHE/bin" >> GITHUB_PATH
+            find . -name "*.proto" | xargs -I {} protoc -I=lib --dart_out=lib/generated "{}"
+        fi
 
         # Run the actual tests.
         if [ -d "test" ]
