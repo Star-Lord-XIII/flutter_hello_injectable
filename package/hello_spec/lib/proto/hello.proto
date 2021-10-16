@@ -1,7 +1,22 @@
 syntax = "proto3";
 package hello_spec;
 
+import "google/protobuf/any.proto";
+
 message Hello {
     int32 id = 1;
     string name = 2;
+    google.protobuf.Any secret_code = 3;
+}
+
+message StringSecret {
+    string secret_code = 1;
+}
+
+message DoubleSecret {
+    double secret_code = 1;
+}
+
+message IntSecret {
+    int32 secret_code = 1;
 }
