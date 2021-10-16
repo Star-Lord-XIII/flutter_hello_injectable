@@ -23,8 +23,7 @@ function ci_projects () {
         then
             dart pub global activate protoc_plugin
             echo "$PUB_CACHE/bin" >> GITHUB_PATH
-            find . -name "*.proto" -path "./lib/proto/google/protobuf/*" | xargs -I {} protoc -I=lib/proto  --dart_out=lib/generated "{}"
-            find . -name "*.proto" ! -path "./lib/proto/google/protobuf/*" | xargs -I {} protoc -I=lib  --dart_out=lib/generated "{}"
+            find . -name "*.proto" | xargs -I {} protoc -I=lib --dart_out=lib/generated "{}"
         fi
 
         # Run the actual tests.
