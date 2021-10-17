@@ -48,12 +48,8 @@ jobs:
       - uses: arduino/setup-protoc@v1
         with:
             repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Install app dependencies
-        run: flutter pub get
-      - name: Generate code
-        run: flutter packages pub run build_runner build
-      - name: Test app
-        run: flutter test --coverage
+      - name: Test app and packages
+        run: ./tool/flutter_test_coverage_script.sh
       - name: Publish to coveralls.io
         uses: coverallsapp/github-action@master
         with:
