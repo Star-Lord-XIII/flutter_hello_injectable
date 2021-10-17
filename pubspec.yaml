@@ -12,6 +12,11 @@ dependencies:
     sdk: flutter
   injectable: ^1.5.0
   get_it: ^7.2.0
+  hello_spec:
+    path: package/hello_spec
+
+dependency_overrides:
+  dart_style: any
       
 
 dev_dependencies:

@@ -156,7 +156,7 @@ packages:
     source: hosted
     version: "3.0.1"
   dart_style:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: dart_style
       url: "https://pub.dartlang.org"
@@ -228,6 +228,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  hello_spec:
+    dependency: "direct main"
+    description:
+      path: "package/hello_spec"
+      relative: true
+    source: path
+    version: "0.0.1"
   http_multi_server:
     dependency: transitive
     description:
@@ -340,6 +347,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.0"
+  protobuf:
+    dependency: transitive
+    description:
+      name: protobuf
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
+  protoc_plugin:
+    dependency: transitive
+    description:
+      name: protoc_plugin
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "20.0.0"
   pub_semver:
     dependency: transitive
     description:

@@ -9,6 +9,10 @@
 .history
 .svn/
 
+# Dart generated code
+**/injection.config.dart
+coverage/
+
 # IntelliJ related
 *.iml
 *.ipr
