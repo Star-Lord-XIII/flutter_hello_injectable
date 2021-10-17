@@ -11,7 +11,7 @@ function ci_projects () {
         # Grab packages.
         flutter pub get
 
-        if [ "${PROJECT_NAME}" == "."]
+        if [ "${PROJECT_NAME}" == "." ]
         then
             flutter packages pub run build_runner build
         fi
