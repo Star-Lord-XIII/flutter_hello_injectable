@@ -19,7 +19,10 @@ function ci_projects () {
         find . -name "*.dart" ! -path './package/hello_spec/*' | xargs dart format --set-exit-if-changed
 
         # Generate dart code for protos
-        if [ "${PROJECT_NAME}" == "package/hello_spec" ]
+        if [ "$PROJECT_NAME}" == "."]
+        then
+            flutter packages pub run build_runner build
+        elif [ "${PROJECT_NAME}" == "package/hello_spec" ]
         then
             dart pub global activate protoc_plugin
             echo "$PUB_CACHE/bin" >> GITHUB_PATH
