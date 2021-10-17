@@ -50,6 +50,8 @@ jobs:
             repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Install app dependencies
         run: flutter pub get
+      - name: Generate code
+        run: flutter packages pub run build_runner build
       - name: Test app
         run: flutter test --coverage
       - name: Publish to coveralls.io
