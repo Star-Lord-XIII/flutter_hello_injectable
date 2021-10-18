@@ -4,6 +4,11 @@ package hello_spec;
 message Hello {
     int32 id = 1;
     string name = 2;
+    oneof secret_code {
+        StringSecret string_secret_code = 3;
+        DoubleSecret double_secret_code = 4;
+        IntSecret int_secret_code = 5;
+    }
 }
 
 message StringSecret {

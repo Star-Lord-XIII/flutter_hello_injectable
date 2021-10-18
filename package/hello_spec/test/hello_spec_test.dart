@@ -7,33 +7,35 @@ void main() {
   test('hello_spec proto <-> json', () {
     var jsonStr =
         '{"id":1,"name":"Chintan Ghate","secretCode":{"secretCode":"hello"}}';
-    var parsed = Hello()
-      ..mergeFromProto3Json(jsonDecode(jsonStr), ignoreUnknownFields: true);
+    var parsed = _parseHelloJson(jsonStr);
+    var secretCode = StringSecret.create()..secretCode = 'hello';
     var expected = Hello.create()
       ..id = 1
-      ..name = 'Chintan Ghate';
+      ..name = 'Chintan Ghate'
+      ..stringSecretCode = secretCode;
     expect(parsed, expected);
-    var extractedSecretCode = _extractSecretCode(jsonStr);
-    if (extractedSecretCode is DoubleSecret) {
-      expect(_extractSecretCode(jsonStr),
-          DoubleSecret.create()..secretCode = 123.25);
-    } else if (extractedSecretCode is IntSecret) {
-      expect(_extractSecretCode(jsonStr), IntSecret.create()..secretCode = 123);
-    } else if (extractedSecretCode is StringSecret) {
-      expect(_extractSecretCode(jsonStr),
-          StringSecret.create()..secretCode = 'hello');
-    }
   });
 }
 
-dynamic _extractSecretCode(String jsonStr) {
+Hello _parseHelloJson(String jsonStr) {
+  var hello = Hello()
+    ..mergeFromProto3Json(jsonDecode(jsonStr), ignoreUnknownFields: true);
   var key = 'secretCode';
   var jsonToMap = jsonDecode(jsonStr) as Map<String, dynamic>;
   var secretCodeMap = jsonToMap[key];
   if (secretCodeMap[key] is String) {
-    return StringSecret()..mergeFromProto3Json(secretCodeMap);
+    var secret = StringSecret()..mergeFromProto3Json(secretCodeMap);
+    return hello
+      ..toBuilder()
+      ..stringSecretCode = secret;
   } else if (secretCodeMap[key] is double) {
-    return DoubleSecret()..mergeFromProto3Json(secretCodeMap);
+    var secret = DoubleSecret()..mergeFromProto3Json(secretCodeMap);
+    return hello
+      ..toBuilder()
+      ..doubleSecretCode = secret;
   }
-  return IntSecret()..mergeFromProto3Json(secretCodeMap);
+  var secret = IntSecret()..mergeFromProto3Json(secretCodeMap);
+  return hello
+    ..toBuilder()
+    ..intSecretCode = secret;
 }
