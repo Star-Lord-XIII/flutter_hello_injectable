@@ -2,24 +2,24 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hello_spec/generated/proto/hello.pb.dart';
+import 'package:hello_spec/extension/proto_json.dart';
 
 void main() {
   test('hello_spec proto <-> json', () {
     var jsonStr =
-        '{"id":1,"name":"Chintan Ghate","secretCode":{"secretCode":"hello"}}';
+        '{"id":1,"name":"Chintan Ghate","secretCode":{"secretCode":123.23}}';
     var parsed = _parseHelloJson(jsonStr);
-    var secretCode = StringSecret.create()..secretCode = 'hello';
+    var secretCode = DoubleSecret.create()..secretCode = 123.23;
     var expected = Hello.create()
       ..id = 1
       ..name = 'Chintan Ghate'
-      ..stringSecretCode = secretCode;
+      ..doubleSecretCode = secretCode;
     expect(parsed, expected);
   });
 }
 
 Hello _parseHelloJson(String jsonStr) {
-  var hello = Hello()
-    ..mergeFromProto3Json(jsonDecode(jsonStr), ignoreUnknownFields: true);
+  var hello = Hello()..fromJson(jsonStr);
   var key = 'secretCode';
   var jsonToMap = jsonDecode(jsonStr) as Map<String, dynamic>;
   var secretCodeMap = jsonToMap[key];
